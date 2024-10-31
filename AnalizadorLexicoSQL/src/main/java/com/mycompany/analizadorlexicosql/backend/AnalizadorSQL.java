@@ -404,6 +404,7 @@ public class AnalizadorSQL {
 
     public void manejarToken(TipoToken tipo, String valor) {
         tokens.add(new Token(valor, linea, columna, tipo));
+        columna++;
     }
 
     public void nuevaLinea() {
