@@ -85,9 +85,16 @@ public class ValidadorDML {
         if (i >= tokens.size() || !tokens.get(i++).getValor().equalsIgnoreCase("FROM")) {
             return false;
         }
-        // Verificar identificador de la tabla
 
-        return tokens.get(i++).getTipo() == TipoToken.IDENTIFICADOR;
+        i++;
+        // Verificar identificador de la tabla
+        if (tokens.get(i).getTipo() != TipoToken.IDENTIFICADOR) {
+            return false;
+        }
+
+        
+
+        return true;
     }
 
     public boolean esDelete(List<Token> tokens) {
