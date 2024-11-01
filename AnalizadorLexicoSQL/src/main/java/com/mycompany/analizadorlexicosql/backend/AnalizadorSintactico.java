@@ -19,6 +19,9 @@ public class AnalizadorSintactico {
 
     public ArrayList<Token> getErrores() {
         ArrayList<Token> erroresToken = new ArrayList<>();
+        for (Estructura estructura : errores) {
+            erroresToken.addAll(estructura.getTokens());
+        }
         return erroresToken;
     }
 

@@ -19,6 +19,7 @@ public class FramePrincipal extends javax.swing.JFrame {
     
     private ArrayList<Estructura> estructurasSQL;
     private ArrayList<Token> errores;
+    private ArrayList<Token> erroresSintactico;
 
     public FramePrincipal() {
         initComponents();
@@ -36,8 +37,8 @@ public class FramePrincipal extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         generarGraficoBtn = new javax.swing.JMenu();
-        reportesBtn = new javax.swing.JMenu();
-        reporteLexicoBtn = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 102, 102));
@@ -59,22 +60,21 @@ public class FramePrincipal extends javax.swing.JFrame {
         });
         jMenuBar1.add(generarGraficoBtn);
 
-        reportesBtn.setText("Reportes");
-        reportesBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+        jMenu1.setText("ReporteLexico");
+        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                reportesBtnMouseClicked(evt);
+                jMenu1MouseClicked(evt);
             }
         });
+        jMenuBar1.add(jMenu1);
 
-        reporteLexicoBtn.setText("Reporte Léxico");
-        reporteLexicoBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+        jMenu2.setText("ReporteSintactico");
+        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                reporteLexicoBtnMouseClicked(evt);
+                jMenu2MouseClicked(evt);
             }
         });
-        reportesBtn.add(reporteLexicoBtn);
-
-        jMenuBar1.add(reportesBtn);
+        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
@@ -115,6 +115,7 @@ public class FramePrincipal extends javax.swing.JFrame {
         
         AnalizadorSintactico analizadorSintactico= new AnalizadorSintactico(tokens);
         estructurasSQL = analizadorSintactico.getEstructurasSQL();
+        erroresSintactico = analizadorSintactico.getErrores();
         
         pintarTokens(tokens);
         //imprimirTokens(tokens);
@@ -130,15 +131,17 @@ public class FramePrincipal extends javax.swing.JFrame {
         mostrarMensaje("Confirmación", "Gráficos generados en la ruta relativa.");
     }//GEN-LAST:event_generarGraficoBtnMouseClicked
 
-    private void reportesBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportesBtnMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_reportesBtnMouseClicked
-
-    private void reporteLexicoBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reporteLexicoBtnMouseClicked
+    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
         Reporte reporte = new Reporte();
         reporte.crearReporteLexico(errores);
         System.out.println("Reporte lexico creado");
-    }//GEN-LAST:event_reporteLexicoBtnMouseClicked
+    }//GEN-LAST:event_jMenu1MouseClicked
+
+    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
+        Reporte reporte = new Reporte();
+        reporte.crearReporteSintactico(erroresSintactico);
+        System.out.println("Reporte sintactico creado");
+    }//GEN-LAST:event_jMenu2MouseClicked
 
     private void mostrarMensaje(String titulo, String mensaje){
         JDialog dialogo = new JDialog(this, titulo, true);
@@ -216,10 +219,10 @@ public class FramePrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu generarGraficoBtn;
     private javax.swing.JButton jButton1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextPane jTextPane1;
-    private javax.swing.JMenuItem reporteLexicoBtn;
-    private javax.swing.JMenu reportesBtn;
     // End of variables declaration//GEN-END:variables
 }
