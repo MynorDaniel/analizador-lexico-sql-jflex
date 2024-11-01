@@ -401,9 +401,15 @@ public class AnalizadorSQL {
     int linea = 1;
     int columna = 1;
     ArrayList<Token> tokens = new ArrayList<>();
+    ArrayList<Token> errores = new ArrayList<>();
 
     public void manejarToken(TipoToken tipo, String valor) {
         tokens.add(new Token(valor, linea, columna, tipo));
+        columna++;
+    }
+    
+    public void manejarError(TipoToken tipo, String valor) {
+        errores.add(new Token(valor, linea, columna, tipo));
         columna++;
     }
 
@@ -414,6 +420,10 @@ public class AnalizadorSQL {
 
     public ArrayList<Token> getTokens() {
         return tokens;
+    }
+    
+    public ArrayList<Token> getErrores() {
+        return errores;
     }
 
 
@@ -829,6 +839,7 @@ public class AnalizadorSQL {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1:
             { System.out.println("Error: " + yytext());
+              manejarError(TipoToken.ERROR, yytext());
             }
           // fall through
           case 77: break;

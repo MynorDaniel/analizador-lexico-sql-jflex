@@ -4,11 +4,6 @@
   <NonVisualComponents>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
-        <Menu class="javax.swing.JMenu" name="archivoBtn">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Archivo"/>
-          </Properties>
-        </Menu>
         <Menu class="javax.swing.JMenu" name="generarGraficoBtn">
           <Properties>
             <Property name="text" type="java.lang.String" value="Generar Gr&#xe1;ficos"/>
@@ -21,11 +16,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Reportes"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="reportesBtnMouseClicked"/>
+          </Events>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="reporteLexicoBtn">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Reporte L&#xe9;xico"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="reporteLexicoBtnMouseClicked"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

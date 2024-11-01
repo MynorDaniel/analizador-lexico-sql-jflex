@@ -101,5 +101,7 @@ public enum TipoToken {
 
     // Identificadores y otros
     IDENTIFICADOR,    
-    OTRO              
+    OTRO,
+    
+    ERROR
 }

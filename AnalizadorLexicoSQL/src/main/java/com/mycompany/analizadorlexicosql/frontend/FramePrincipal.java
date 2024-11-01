@@ -18,6 +18,7 @@ import javax.swing.text.*;
 public class FramePrincipal extends javax.swing.JFrame {
     
     private ArrayList<Estructura> estructurasSQL;
+    private ArrayList<Token> errores;
 
     public FramePrincipal() {
         initComponents();
@@ -34,7 +35,6 @@ public class FramePrincipal extends javax.swing.JFrame {
         jTextPane1 = new javax.swing.JTextPane();
         jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        archivoBtn = new javax.swing.JMenu();
         generarGraficoBtn = new javax.swing.JMenu();
         reportesBtn = new javax.swing.JMenu();
         reporteLexicoBtn = new javax.swing.JMenuItem();
@@ -51,9 +51,6 @@ public class FramePrincipal extends javax.swing.JFrame {
             }
         });
 
-        archivoBtn.setText("Archivo");
-        jMenuBar1.add(archivoBtn);
-
         generarGraficoBtn.setText("Generar Gráficos");
         generarGraficoBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -63,8 +60,18 @@ public class FramePrincipal extends javax.swing.JFrame {
         jMenuBar1.add(generarGraficoBtn);
 
         reportesBtn.setText("Reportes");
+        reportesBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                reportesBtnMouseClicked(evt);
+            }
+        });
 
         reporteLexicoBtn.setText("Reporte Léxico");
+        reporteLexicoBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                reporteLexicoBtnMouseClicked(evt);
+            }
+        });
         reportesBtn.add(reporteLexicoBtn);
 
         jMenuBar1.add(reportesBtn);
@@ -104,6 +111,7 @@ public class FramePrincipal extends javax.swing.JFrame {
         } catch (IOException e) {
         }
         ArrayList<Token> tokens = analizadorLexico.getTokens();
+        errores = analizadorLexico.getErrores();
         
         AnalizadorSintactico analizadorSintactico= new AnalizadorSintactico(tokens);
         estructurasSQL = analizadorSintactico.getEstructurasSQL();
@@ -121,6 +129,16 @@ public class FramePrincipal extends javax.swing.JFrame {
         }
         mostrarMensaje("Confirmación", "Gráficos generados en la ruta relativa.");
     }//GEN-LAST:event_generarGraficoBtnMouseClicked
+
+    private void reportesBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportesBtnMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_reportesBtnMouseClicked
+
+    private void reporteLexicoBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reporteLexicoBtnMouseClicked
+        Reporte reporte = new Reporte();
+        reporte.crearReporteLexico(errores);
+        System.out.println("Reporte lexico creado");
+    }//GEN-LAST:event_reporteLexicoBtnMouseClicked
 
     private void mostrarMensaje(String titulo, String mensaje){
         JDialog dialogo = new JDialog(this, titulo, true);
@@ -196,7 +214,6 @@ public class FramePrincipal extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu archivoBtn;
     private javax.swing.JMenu generarGraficoBtn;
     private javax.swing.JButton jButton1;
     private javax.swing.JMenuBar jMenuBar1;
